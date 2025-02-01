@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: amana-qr
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        value: mongodb+srv://aymenhmida1:kGJInUb8eD6meHBt@cluster0.ftir2.mongodb.net/amanaqr?retryWrites=true&w=majority&appName=Cluster0&tls=true
+      - key: NEXTAUTH_SECRET
+        generateValue: true
+      - key: NEXTAUTH_URL
+        value: https://amana-qr.onrender.com

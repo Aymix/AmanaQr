@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 interface ObjectFormProps {
@@ -34,19 +34,8 @@ const ObjectForm: FC<ObjectFormProps> = ({ code }) => {
     setError(null);
     
     try {
-      // First check if the QR code is still available
-      const checkResponse = await fetch(`/api/qrcodes/${code}`);
-      const checkData = await checkResponse.json();
-
-      if (!checkResponse.ok) {
-        throw new Error('Failed to verify QR code status');
-      }
-
-      if (checkData.qrCode.isAssigned) {
-        router.push(`/details/${code}`);
-        return;
-      }
-
+      
+      console.log('Form data:', formData);
       // If QR code is available, proceed with submission
       const response = await fetch('/api/qrcodes/submit', {
         method: 'POST',
@@ -59,7 +48,9 @@ const ObjectForm: FC<ObjectFormProps> = ({ code }) => {
         }),
       });
 
+
       const data = await response.json();
+      console.log('Submission response:', data);
 
       if (!response.ok) {
         throw new Error(data.error || 'Failed to submit form');
@@ -79,6 +70,27 @@ const ObjectForm: FC<ObjectFormProps> = ({ code }) => {
       setShowConfirmation(false);
     }
   };
+
+  useEffect(() => {
+     // First check if the QR code is still available
+    
+     const fetchData = async () => {
+      console.log('Checking QR code availability...');
+      const checkResponse = await fetch(`/api/qrcodes/${code}`);
+    
+      const checkData = await checkResponse.json();
+    
+      console.log('QR code status:', checkData);
+      if (!checkResponse.ok) {
+        throw new Error('Failed to verify QR code status');
+      }
+      if (checkData.qrCode.isAssigned) {
+        setFormData(checkData.qrCode.objectDetails);
+      }
+      };
+    fetchData();
+  }, []);
+ 
 
   return (
     <>

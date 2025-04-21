@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://mongodb:27017/qrdb';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://aymenhmida1:kGJInUb8eD6meHBt@cluster0.ftir2.mongodb.net/amanaqr?retryWrites=true&w=majority&appName=Cluster0&tls=true';
 
 if (!MONGODB_URI) {
   throw new Error('Please define the MONGODB_URI environment variable');
@@ -13,6 +13,7 @@ if (!cached) {
 }
 
 async function dbConnect() {
+  console.log('Connecting to database...');
   if (cached.conn) {
     console.log('Using cached database connection');
     return cached.conn;

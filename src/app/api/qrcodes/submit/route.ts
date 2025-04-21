@@ -24,19 +24,21 @@ export async function POST(req: NextRequest) {
         { status: 404 }
       );
     }
-    
+    /*
     if (qrCode.isAssigned) {
       return NextResponse.json(
         { success: false, error: 'QR code already assigned' },
         { status: 400 }
       );
     }
-    
+    */
+
     // Update QR code with object details
     qrCode.objectDetails = objectDetails;
     qrCode.isAssigned = true;
     
     const updatedQRCode = await qrCode.save();
+    console.log('QR code updated:', updatedQRCode);
     
     return NextResponse.json({ 
       success: true, 

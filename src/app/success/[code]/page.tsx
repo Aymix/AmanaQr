@@ -1,4 +1,4 @@
-'use client';
+'use server';
 
 import Link from 'next/link';
 
@@ -8,8 +8,8 @@ interface PageProps {
   };
 }
 
-export default function SuccessPage({ params }: PageProps) {
-  const { code } = params;
+export default async function SuccessPage({ params }: PageProps) {
+  const { code } = await params;
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">

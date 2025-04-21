@@ -285,10 +285,10 @@ export default function Home() {
                   <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 space-x-2">
                     {qrCode.isAssigned ? (
                       <Link
-                        href={`/details/${qrCode.code}`}
+                        href={`/edit/${qrCode.code}`}
                         className="text-indigo-600 hover:text-indigo-900"
                       >
-                        View Details
+                        Edit Details
                       </Link>
                     ) : (
                       <Link
@@ -297,6 +297,7 @@ export default function Home() {
                       >
                         Add Details
                       </Link>
+                      
                     )}
                     <button
                       onClick={() => handlePrint(qrCode)}

@@ -1,9 +1,9 @@
 services:
   - type: web
     name: amana-qr
-    env: node
+    runtime: node
     buildCommand: npm install && npm run build
-    startCommand: npm start
+    startCommand: npm run start
     envVars:
       - key: NODE_ENV
         value: production
@@ -12,4 +12,4 @@ services:
       - key: NEXTAUTH_SECRET
         generateValue: true
       - key: NEXTAUTH_URL
-        value: https://amana-qr.onrender.com
+        value: https://amanaqr.onrender.com/
